@@ -416,6 +416,7 @@ bool PrioritizedTaskList::remove_task_id(int priority, int task_id) {
     if (priorityNode != NULL) {
         priorityNode->remove_task_id(task_id);
     }
+    return true;
 }
 
 bool PrioritizedTaskList::add(int priority, int taskId, char *taskName, int length) {
@@ -424,6 +425,7 @@ bool PrioritizedTaskList::add(int priority, int taskId, char *taskName, int leng
     }
     PrioritizedTaskListNode *priorityList = get_address(priority);
     priorityList->add_task(taskId, taskName, length);
+    return true;
 }
 
 bool PrioritizedTaskList::addPriorityList(int v) {
@@ -456,6 +458,7 @@ bool PrioritizedTaskList::addPriorityList(int v) {
                 curr = curr->get_left();
         }
     }
+    return true;
 }
 
 PrioritizedTaskList::PrioritizedTaskList() {
@@ -639,7 +642,3 @@ int main() {
     tree1.display();
     return 0;
 }
-
-
-
-
