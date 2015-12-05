@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
+#include <sstream> //convert data types in getline
+#include <vector>
+using namespace std;
+
+// Declare Variables 
+bool add(int*, int*, int, int);
+
+int main(){
+
+	int cap=10;
+	int a[cap];
+	int csz=0;
+	int val=11;
+	bool flag=false;
+	
+	for(int i=0; i<15; i++){
+	flag=add(a, &csz, cap, i);
+	if(flag)
+		cout << "added succesfully" << endl;
+	else
+		cout << "Add successful " << endl;
+	}
+
+return 0;
+}
+
+bool add(int* p, int* s, int cap, int v){
+	if(*s==cap)
+		return false;
+	p[*s]=v;
+	(*s)++;
+	return true;
+
+}	

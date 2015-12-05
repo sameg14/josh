@@ -1,0 +1,139 @@
+#include<iostream>
+using namespace std;
+/*
+Implement an insert class function:
+bool insert_before(int val1, int val2);
+that inserts val1 before val2 in the list.
+Returns false if val2 is not found in the list, true otherwise.
+*/
+
+
+class MyList{
+  class Node{
+    private:
+      int val;
+      Node* next;
+
+    public:
+      Node();
+      Node(int);
+      int get_val();
+      bool set_val(int);
+      Node* get_next();
+      bool set_next(Node*);
+      
+
+  };
+
+  private:
+    Node* begin;
+
+  public:
+    MyList();
+    ~MyList();
+    bool add(int);
+    //bool remove(int&);
+    void display();
+    bool insert_before(int val1, int val2);
+};
+
+MyList::Node::Node(){
+  val=0;
+  next=NULL;
+}
+
+MyList::Node::Node(int v){
+  val=v;
+  next=NULL;
+}
+
+int MyList::Node::get_val(){
+  return val;
+}
+/*
+bool MyList::Node::set_val(int v){
+  val=v;
+  return true;
+}
+*/
+/*bool MyList::Node::insert_before(int val1, int val2){
+	bool flag=false;
+	MyList::Node* temp = begin;
+
+}
+*/
+bool MyList::insert_before(int val1, int val2){
+	
+	MyList::Node* temp = begin;
+	while(temp!=NULL){
+		if (temp->get_val() == val2){
+			Node* temp2 = new Node(val1);
+			Node* curr;
+			curr=temp2;
+			temp2->set_next(curr);
+			begin = temp2;
+			return true;
+			}
+		else{
+			temp = temp->get_next();
+			}
+		}
+return true;
+}
+
+MyList::Node* MyList::Node::get_next(){
+  return next;
+}
+
+bool MyList::Node::set_next(MyList::Node* n){
+  next=n;
+}
+
+MyList::MyList(){
+  begin=NULL;
+}
+
+bool MyList::add(int v){
+  MyList::Node* temp = new MyList::Node(v);
+
+  if (begin==NULL){
+    begin=temp;
+    return true;
+  }
+  else{
+    temp->set_next(begin);
+    begin=temp;
+    return true;
+  }
+}
+
+void MyList::display(){
+  MyList::Node* temp=begin;
+
+  while(temp!=NULL){
+    cout << temp->get_val() << " ";
+    temp=temp->get_next();
+  }
+  cout << endl;
+}
+
+MyList::~MyList(){
+  MyList::Node* temp=begin;
+  while(temp!=NULL){
+    Node* save=temp->get_next();
+    cout << "Deleting " << temp->get_val() << endl;
+    delete temp;
+    temp=save;
+  }
+}
+
+int main(){
+  MyList l;
+  MyList l2;
+  for (int i=0;i<10;i++)
+//  for (int i=10;i>0;i--)
+    l.add(i);
+    l.insert_before(20, 8);
+    l.display();
+}
+

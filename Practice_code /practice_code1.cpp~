@@ -1,0 +1,82 @@
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
+
+using namespace std;
+
+double mult(int x,int y){
+	double z;
+	z = x*y;
+	return z;
+}
+float divide(float e,float f){
+	float g;
+	g = e/f;
+	return g;
+}
+//double array(int i){
+	//for(i=0;i<3;i++)
+	
+
+
+//}
+
+int main()
+{	
+/*	int a[5];  //////////enter 5 #s in array/////////////////////////
+	
+	cout << "enter 5 numbers " << endl;
+		
+	for (int i=0;i<5;i++){
+	cout << "You enterd # " << i << ": ";	
+	cin >>  a[i];
+}	
+	
+	int i=0;  		//put i back to i=0
+
+	while (i<5){
+	cout << "Number " << i << ": ";
+	cout << a[i] << endl;
+	i++;
+}*/
+
+
+	int a,b;
+	double c;
+	cout << "enter the 1st number to multiply: ";
+	cin >> a;
+	cout << "enter the 2nd number to multiply: ";
+	cin >> b;
+	cout << "\nand your number is! \n\n";
+	c = mult(a,b);
+	cout << "your two numbers multiplied is " << c << endl << endl;
+
+/*	cout << "First enter numerator then demoninator ";
+	int r,t;
+	double j;
+	cin >> r >> t;
+	j = divide(r,t);
+	cout << "the divided number is " << j << endl;
+ */
+
+
+
+
+
+
+/*int i;
+int value[3];
+	cout << "enter three numbers to output: ";
+for(i=0;i<3;i++){
+	cin >> value[i];
+//	cout << value[i] << endl;
+	}
+	
+*/	
+	
+  return 0;
+}
+
+
+
+

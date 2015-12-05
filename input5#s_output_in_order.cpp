@@ -1,0 +1,53 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+  int a[5];
+
+  cout << "Input 5 values.\n";
+
+  for(int i=0;i<5;i++){
+    cout << "Input number " << i << ": ";
+    cin >> a[i];
+  }
+
+  /*
+  for(int i=0;i<5;i++){
+    cout << "Number " << i << ": ";
+    cout << a[i] << endl;
+  }
+  */
+
+  int i=0;
+
+  while(i<5){
+    cout << "Number " << i << ": ";
+    cout << a[i] << endl;
+    //i=i+1;
+    i++;
+  }
+
+  return 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

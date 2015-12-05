@@ -1,0 +1,195 @@
+#include<iostream>
+using namespace std;
+
+class MyList{
+    class Node{
+    private:
+        int val;
+        Node* next;
+        
+    public:
+        Node();
+        Node(int);
+        int get_val();
+        bool set_val(int);
+        Node* get_next();
+        bool set_next(Node*);
+
+    };
+    
+private:
+    Node* begin;
+    
+public:
+    MyList();
+    ~MyList();
+    bool add(int);
+    bool insert_before(int val1, int val2);
+    bool insert_after(int val1, int val2);
+    //bool remove(int&);
+    bool remove(int val);
+    void display();
+    void reverse();
+};
+
+MyList::Node::Node(){
+    val=0;
+    next=NULL;
+}
+
+MyList::Node::Node(int v){
+    val=v;
+    next=NULL;
+}
+
+int MyList::Node::get_val(){
+    return val;
+}
+
+bool MyList::Node::set_val(int v){
+    val=v;
+    return true;
+}
+
+MyList::Node* MyList::Node::get_next(){
+    return next;
+}
+
+bool MyList::Node::set_next(MyList::Node* n){
+    next=n;
+    return true;
+}
+
+MyList::MyList(){
+    begin=NULL;
+}
+
+bool MyList::add(int v){
+    MyList::Node* temp = new MyList::Node(v);
+    
+    if (begin==NULL){
+        begin=temp;
+        return true;
+    }
+    else{
+        temp->set_next(begin);
+        begin=temp;
+        return true;
+    }
+}
+bool MyList::insert_after(int val1,int val2){
+    MyList::Node* before=begin;
+    MyList::Node* temp = new MyList::Node(val1);
+    bool flag=false;
+    while(before!=NULL){
+        if(before->get_val()==val2){
+            flag=true;
+            temp->set_next(before->get_next());
+            before->set_next(temp);
+        }
+        before=before->get_next();
+    }
+    return flag;
+}
+
+bool MyList::insert_before(int val1,int val2){
+    MyList::Node* before=begin;
+    MyList::Node* after;
+    MyList::Node* temp = new MyList::Node(val1);
+    bool flag=false;
+    while(before!=NULL){
+        after=before->get_next();
+        if(begin->get_val()==val2){
+            temp->set_next(begin);
+            begin=temp;
+            flag=true;
+        }
+        if(after!=NULL){
+            if(after->get_val()==val2){
+                flag=true;
+                before->set_next(temp);
+                temp->set_next(after);
+            }
+        }
+        before=after;
+    }
+    return flag;
+}
+bool MyList::remove(int val){
+    MyList::Node* before=begin;
+    MyList::Node* after;
+    bool flag=false;
+    while(before!=NULL){
+        after=before->get_next();
+        if(begin->get_val()==val){
+            begin=begin->get_next();
+            flag=true;
+        }
+        if(after!=NULL){
+            if(after->get_val()==val){
+                flag=true;
+                before->set_next(after->get_next());
+            }
+        }
+        before=after;
+    }
+    return flag;
+}
+
+void MyList::reverse(){
+    if(begin==NULL||begin->get_next()==NULL)
+        return;
+    MyList::Node* parent=begin;
+    MyList::Node* me=parent->get_next();
+    MyList::Node* child=me->get_next();
+    begin->set_next(NULL);
+    me->set_next(begin);
+    while (child!=NULL) {
+        me->set_next(parent);
+        parent=me;
+        me=child;
+        child=child->get_next();
+    }
+    begin = me;
+    begin->set_next(parent);
+}
+
+void MyList::display(){
+    MyList::Node* temp=begin;
+    
+    while(temp!=NULL){
+        cout << temp->get_val() << " ";
+        temp=temp->get_next();
+    }
+    cout << endl;
+}
+
+MyList::~MyList(){
+    MyList::Node* temp=begin;
+    while(temp!=NULL){
+        Node* save=temp->get_next();
+        cout << "Deleting " << temp->get_val() << endl;
+        delete temp;
+        temp=save;
+    }
+}
+
+int main(){
+    MyList l;
+    for (int i=0;i<20;i++)
+        l.add(i);
+    l.display();
+    l.insert_before(100, 3);
+    l.display();
+    if(!l.insert_before(3, 200)){
+        cout<<"fail"<<endl;
+    }
+    l.insert_after(200, 100);
+    l.display();
+//    l.remove(200);
+    l.display();
+    l.reverse();
+    l.display();
+}
+
+

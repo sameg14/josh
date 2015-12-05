@@ -1,0 +1,93 @@
+#include "iostream"
+using namespace std;
+//2.1
+/*Implement a function called add_array that takes two float arrays, their respective sizes, computes the sum of respective indices, and stores the result in the corresponding index of the second array, and returns true or false indicating success or failure. (Note that the function overwrites the content of the second array with the sum.) Using a main function, demonstrate 
+that it works.
+*/
+/*bool add_array(float* a1, float* a2, int size1, int size2){
+    if(a1==NULL||a2==NULL||size1<0 || size2<0 || size1!=size2)
+        return false;
+    for(int i=0; i<size1; i++){
+        a2[i]=a1[i]+a2[i];
+    }
+    return true;
+}
+
+int main(){
+    float arr1[4]={1.1,2.2,3.3,4.4};
+    float arr2[4]={1.1,1.1,1.1,1.1};
+    add_array(arr1, arr2, 4, 4);
+    for(int i=0; i<4; i++)
+        cout<<arr2[i]<<"  ";
+    cout<<endl;
+    return 0;
+}*/
+/*
+//2.2
+bool is_valid_email(char* addr,int size){
+    int pos_at=0;
+    for(int i=0; i<size; i++){
+        if(addr[i]=='@'){//check @
+            pos_at=i;
+            if(i<1){
+                cout<<"no string before @"<<endl;
+                return false;
+            }
+        }
+    }
+    if(pos_at==0){
+        cout<<"no @"<<endl;
+        return false;//no @
+    }
+    if(addr[size-4]!='.' || addr[size-3]!='c' || addr[size-2]!='o' || addr[size-1]!='m'){
+        cout<<"no .com at the end of string"<<endl;
+        return false;
+    }
+    else{
+        if(pos_at+1==size-4){
+            cout<<"wrong pos of .com"<<endl;
+            return false;
+        }
+    }
+    return true;
+}
+
+int main(){
+    char* addr="asd@gmail.com";
+    char* addr1="@fdd.com";
+    char* addr2="adf@.com";
+    char* addr3="123@.c";
+    char* addr4="dfds.com";
+    cout<<addr<<"  "<<is_valid_email(addr, 13)<<endl;
+    cout<<addr1<<"  "<<is_valid_email(addr1, 8)<<endl;
+    cout<<addr2<<"  "<<is_valid_email(addr2, 8)<<endl;
+    cout<<addr3<<"  "<<is_valid_email(addr3, 6)<<endl;
+    cout<<addr4<<"  "<<is_valid_email(addr4, 8)<<endl;
+    return 0;
+}
+*/
+//2.3
+/*bool is_fibonacci(int num){
+    int pre=0;
+    int cur=1;
+    int temp;
+    if(num==1 ||num==0)
+        return true;
+    while(cur<=num){
+        temp=pre;
+        pre=cur;
+        cur=temp+cur;
+        if(cur==num)
+            return true;
+    }
+    return false;
+}
+int main(){
+    cout<<"5 "<<is_fibonacci(5)<<endl;
+    cout<<"6 "<<is_fibonacci(6)<<endl;
+    cout<<"21 "<<is_fibonacci(21)<<endl;
+    return 0;
+}*/
+
+
+

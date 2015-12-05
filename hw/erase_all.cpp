@@ -1,0 +1,56 @@
+//Due Oct 13,2015
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
+#include <sstream> //convert data types in getline
+#include <vector>
+using namespace std;
+/*
+(4 points) A function bool erase_all(int* d, int* size, int val) that would remove all occurrences of val from the list and update the size of the list. Returns true if val was found (and removed) at least once, false otherwise.
+*/
+
+//example--dynamic array
+
+void display(int* d, int sz){
+	for(int i=0; i<sz; i++){
+		cout<<d[i]<<"  ";
+	}
+	cout<<endl;
+}
+
+int* erase_all(int* d, int val, int* sz){
+	int* temp=new int[*sz-1];
+	for(int i=0; i<*sz; i++){
+		if (!(d[i]==val))
+			temp[i]=d[i];	
+	}
+/*	for(int i=0; i<*sz; i++){
+		if(d[i]==val)
+			temp[i]=d[*sz];
+
+	}
+*/
+//	temp[*sz]=temp[*sz-1];
+	delete [] d;
+	return temp;
+}
+
+int main(){
+	int size=5;
+	int* d=new int[size];
+	for(int i=0; i<size; i++){
+		d[i]=i;
+	}
+//	int d[size]={1,2,3,3,4};
+	cout<<"original array: ";
+	display(d,size);
+	d=erase_all(d, 1,&size);
+	display(d,size);
+
+	return 0;
+}
+
+
+
+		
+

@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
+#include <sstream> //convert data types in getline
+#include <vector>
+using namespace std;
+
+class Point{
+	private:
+	  int x;
+	  int y;
+
+	public:
+	  Point();
+	  Point(int, int); 
+	  void display();
+	  void add(int,int);
+	  void subtract(int, int);
+};
+Point::Point(){
+	x=0;
+	y=0;
+}
+Point::Point(int a, int b){
+	x=a;
+	y=b;
+}
+void Point::add(int c, int d){
+	x+=c;
+	y+=d;
+}
+void Point::subtract(int e, int f){
+	x-=e;
+	y-=f;
+}
+void Point::display(){
+	cout << endl;
+	cout << x << endl;
+	cout << y << endl;
+}
+int main(){
+	Point p1;
+	p1.display();
+	Point p2(1, 2);
+	p2.display();
+	p2.add(2,3);
+	p2.display();
+	p2.subtract(3,5);
+	p2.display();
+
+
+
+
+
+}

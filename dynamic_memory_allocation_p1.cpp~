@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+/*
+int main(){
+  int* p;
+  cout << p << endl;
+  p=new int;
+
+//outputs address 
+  cout << p << endl;
+
+//outputs int of p
+  cout << *p << endl;
+
+// set value of address to 10
+  *p=10;
+
+//output value of address
+  cout << *p << endl;
+  delete p;
+}
+*/
+main(){
+	int* p;
+	int* z;  
+	p= new int; 
+	*p=234;
+	z = new int;
+	*z=*p+10;
+	cout << p << " " << *p << endl;
+//	delete p; 
+	cout << z << " " << *z << endl;
+//	delete z;
+
+
+}
