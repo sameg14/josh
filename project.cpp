@@ -102,7 +102,13 @@ public:
     bool does_task_exist(int task_id);
 
     char *get_task_name();
+
+    int get_task_id();
 };
+
+int DoublyLinkedTaskList::get_task_id() {
+    return begin->get_task_id();
+}
 
 char *DoublyLinkedTaskList::get_task_name() {
     return begin->get_task_name();
@@ -208,7 +214,13 @@ public:
 //    bool is_present(int);
 
     char *get_task_name();
+
+    int get_task_id();
 };
+
+int PrioritizedTaskListNode::get_task_id() {
+    return tasks.get_task_id();
+}
 
 char *PrioritizedTaskListNode::get_task_name() {
     return this->tasks.get_task_name();
@@ -374,7 +386,7 @@ void PrioritizedTaskList::display_internal(PrioritizedTaskListNode *curr) {
     // inorder recursion
     if (curr == NULL) return;
     display_internal(curr->get_left());
-    cout << "Priority: " << curr->get_priority() << "\tTask Name: " << curr->get_task_name() << "\n";
+    cout << "Priority: " << curr->get_priority() << "\t\tTask Name: " << curr->get_task_name() << "\t\tTask Id: " << curr->get_task_id() << "\n";
     //cout <<
     display_internal(curr->get_right());
 }
