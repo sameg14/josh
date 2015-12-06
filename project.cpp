@@ -100,7 +100,13 @@ public:
     bool remove_all_task_id(int);
 
     bool does_task_exist(int task_id);
+
+    char *get_task_name();
 };
+
+char *DoublyLinkedTaskList::get_task_name() {
+    return begin->get_task_name();
+}
 
 DoublyLinkedTaskList::DoublyLinkedTaskList() {
     begin = NULL;
@@ -119,8 +125,10 @@ bool DoublyLinkedTaskList::does_task_exist(int task_id) {
 
 bool DoublyLinkedTaskList::add_task(int id, char *name, int len) {
     DoublyLinkedTaskNode *temp = new DoublyLinkedTaskNode(id, name, len);
-    if (temp == NULL)
+    if (temp == NULL) {
         return false;
+    }
+
     if (begin == NULL) {
         begin = temp;
         return true;
@@ -198,7 +206,13 @@ public:
 
     bool does_task_id_exist(int);
 //    bool is_present(int);
+
+    char *get_task_name();
 };
+
+char *PrioritizedTaskListNode::get_task_name() {
+    return this->tasks.get_task_name();
+}
 
 bool PrioritizedTaskListNode::does_task_id_exist(int task_id) {
     return tasks.does_task_exist(task_id);
@@ -354,15 +368,14 @@ void PrioritizedTaskList::displayLists(){
 */
 void PrioritizedTaskList::display() {
     display_internal(root);
-
 }
 
 void PrioritizedTaskList::display_internal(PrioritizedTaskListNode *curr) {
-// inorder recursion 
+    // inorder recursion
     if (curr == NULL) return;
     display_internal(curr->get_left());
-    cout << curr->get_priority() << " ";
-//cout << 
+    cout << "Priority: " << curr->get_priority() << "\tTask Name: " << curr->get_task_name() << "\n";
+    //cout <<
     display_internal(curr->get_right());
 }
 
@@ -418,6 +431,7 @@ bool PrioritizedTaskList::remove_task_id(int priority, int task_id) {
     }
     return true;
 }
+
 
 bool PrioritizedTaskList::add(int priority, int taskId, char *taskName, int length) {
     if (!is_priority_list_present(priority)) {
@@ -637,8 +651,8 @@ int main() {
     tree1.add(5, 13, name2, 5);
     tree1.add(6, 14, name3, 4);
     tree1.display();
-    tree1.removePriorityList(5);
-    cout << endl;
-    tree1.display();
+//    tree1.removePriorityList(5);
+//    cout << endl;
+//    tree1.display();
     return 0;
 }
