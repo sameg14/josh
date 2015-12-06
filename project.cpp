@@ -695,7 +695,6 @@ int main() {
     cout << endl;
 
 
-
     tree2.add(8, 87, name4, 6);
     cout << "______________________________________" << "\n";
     cout << "Contents of tree2" << "\n";
@@ -731,7 +730,7 @@ int main() {
     tree1.remove_priority_list(5);
     cout << endl;
     tree1.display();
-    cout << endl;
+    cout << endl << "what ";
 
     return 0;
 }
