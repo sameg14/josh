@@ -730,7 +730,7 @@ int main() {
     tree1.remove_priority_list(5);
     cout << endl;
     tree1.display();
-    cout << endl << "what ";
+    cout << endl << "what is up";
 
     return 0;
 }
