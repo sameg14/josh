@@ -330,7 +330,7 @@ public:
 
     bool is_priority_list_present(int) const;
 
-    bool removePriorityList(int);
+    bool remove_priority_list(int);
 
     bool remove_task_id(int, int);
 
@@ -573,31 +573,39 @@ bool PrioritizedTaskList::is_priority_list_present(int v) const {
     return false;
 }
 
-bool PrioritizedTaskList::removePriorityList(int priority) {
-    if (!is_priority_list_present(priority))
+bool PrioritizedTaskList::remove_priority_list(int priority) {
+
+    if (!is_priority_list_present(priority)) {
         return false;
+    }
+
     PrioritizedTaskListNode *curr = get_address(priority);
     PrioritizedTaskListNode *parent = get_parent(priority);
 
     if (curr->get_left() == NULL && curr->get_right() == NULL) {
+
         if (curr == root) {
             delete curr;
             root = NULL;
             return true;
         }
+
         if (curr->get_priority() > parent->get_priority()) {
+
             parent->set_right(NULL);
             delete curr;
+
             return true;
-        }
-        else {
+
+        } else {
+
             parent->set_left(NULL);
             delete curr;
+
             return true;
         }
-    }
+    } else if (curr->get_left() == NULL && curr->get_right() != NULL) {
 
-    else if (curr->get_left() == NULL && curr->get_right() != NULL) {
         //in this case, "lift" the right sub-tree.
         //NOTE: if parent is NULL then root needs to be updated
         if (curr == root) {
@@ -606,15 +614,19 @@ bool PrioritizedTaskList::removePriorityList(int priority) {
             delete temp;
             return true;
         }
-        if (priority > parent->get_priority())
-            parent->set_right(curr->get_right());
-        else
-            parent->set_left(curr->get_right());
-        delete curr;
-        return true;
-    }
+        if (priority > parent->get_priority()) {
 
-    else if (curr->get_left() != NULL && curr->get_right() == NULL) {
+            parent->set_right(curr->get_right());
+        } else {
+            parent->set_left(curr->get_right());
+        }
+
+        delete curr;
+
+        return true;
+
+    } else if (curr->get_left() != NULL && curr->get_right() == NULL) {
+
         //in this case, "lift" the left sub-tree.
         if (curr == root) {
             PrioritizedTaskListNode *temp = root;
@@ -622,15 +634,16 @@ bool PrioritizedTaskList::removePriorityList(int priority) {
             delete temp;
             return true;
         }
-        if (priority > parent->get_priority())
+        if (priority > parent->get_priority()) {
             parent->set_right(curr->get_left());
-        else
+        } else {
             parent->set_left(curr->get_left());
+        }
         delete curr;
 
         return true;
-    }
-    else {
+    } else {
+
         //when left and right are not null.
         //in this case, replace the content of
         //curr node with that of the largest key
@@ -641,8 +654,9 @@ bool PrioritizedTaskList::removePriorityList(int priority) {
 
         PrioritizedTaskListNode *leaf = get_largest(curr->get_left());
         int q = leaf->get_priority();
-        removePriorityList(q);
+        remove_priority_list(q);
         curr->set_priority(q);
+
         return true;
     }
 }
@@ -665,23 +679,59 @@ int main() {
 //  task_name[i]=name[i];
 //}
     char name1[] = "Josh";
-    char name2[] = "Megan";
+    char name2[] = "Amis";
     char name3[] = "Jack";
     char name4[] = "Jackie";
+
     tree1.add(2, 12, name1, 4);
     tree1.add(5, 13, name2, 5);
     tree1.add(6, 14, name3, 4);
 
-    tree2.add(8, 87, name4, 6);
-    tree3.add(8, 87, name4, 6);
-
+    cout << "______________________________________" << "\n";
+    cout << "Displaying tree1" << "\n";
+    cout << "______________________________________" << "\n";
+    cout << endl;
     tree1.display();
+    cout << endl;
 
+
+
+    tree2.add(8, 87, name4, 6);
+    cout << "______________________________________" << "\n";
+    cout << "Contents of tree2" << "\n";
+    cout << "______________________________________" << "\n";
+    cout << endl;
+    tree2.display();
+
+    tree3.add(8, 87, name4, 6);
+    cout << "______________________________________" << "\n";
+    cout << "Contents of tree3" << "\n";
+    cout << "______________________________________" << "\n";
+    cout << endl;
+    tree3.display();
+
+    cout << "______________________________________" << "\n";
+    cout << "Is tree2 == tree3?" << "\n";
+    cout << "______________________________________" << "\n";
+    cout << endl;
     bool isEqual = tree2.is_equal_to(tree3);
-    cout << "Is Equal: " << isEqual;
+    if (isEqual) {
 
-//    tree1.removePriorityList(5);
-//    cout << endl;
-//    tree1.display();
+        cout << " Your trees are equal" << endl;
+
+    } else {
+        cout << " Your trees are NOT equal" << endl;
+    }
+    cout << endl;
+
+    cout << "______________________________________" << "\n";
+    cout << "Removing priority # 5 from tree1" << "\n";
+    cout << "______________________________________" << "\n";
+    cout << endl;
+    tree1.remove_priority_list(5);
+    cout << endl;
+    tree1.display();
+    cout << endl;
+
     return 0;
 }
