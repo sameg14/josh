@@ -386,7 +386,8 @@ void PrioritizedTaskList::display_internal(PrioritizedTaskListNode *curr) {
     // inorder recursion
     if (curr == NULL) return;
     display_internal(curr->get_left());
-    cout << "Priority: " << curr->get_priority() << "\t\tTask Name: " << curr->get_task_name() << "\t\tTask Id: " << curr->get_task_id() << "\n";
+    cout << "Priority: " << curr->get_priority() << "\t\tTask Name: " << curr->get_task_name() << "\t\tTask Id: " <<
+    curr->get_task_id() << "\n";
     //cout <<
     display_internal(curr->get_right());
 }
@@ -401,14 +402,18 @@ bool PrioritizedTaskList::is_equal_to(const PrioritizedTaskList &otherList) {
 }
 
 bool PrioritizedTaskList::is_equal_to_internal(const PrioritizedTaskList &otherList, PrioritizedTaskListNode *node) {
+
     if (node != NULL) {
         bool does_priority_exist = otherList.is_priority_list_present(node->get_priority());
-        bool does_task_list_match = otherList.does_task_list_match(node->get_priority(), node->get_task_list());
+
+        // This one is not working
+//        bool does_task_list_match = otherList.does_task_list_match(node->get_priority(), node->get_task_list());
 
         bool is_left_tree_equal = is_equal_to_internal(otherList, node->get_left());
+
         bool is_right_tree_equal = is_equal_to_internal(otherList, node->get_right());
 
-        return (does_priority_exist && does_task_list_match && is_left_tree_equal && is_right_tree_equal);
+        return (does_priority_exist && is_left_tree_equal && is_right_tree_equal);
     }
     else {
         return true;
@@ -417,30 +422,30 @@ bool PrioritizedTaskList::is_equal_to_internal(const PrioritizedTaskList &otherL
 
 bool PrioritizedTaskList::does_task_list_match(int priority, DoublyLinkedTaskList taskList) const {
 ////////////PROBLEM/////////////////////////// 
-/* 
-  if (is_priority_list_present(priority)) {
-     PrioritizedTaskListNode * priorityListNode = get_address(priority);
-     DoublyLinkedTaskList myTaskList = priorityListNode->get_task_list();
 
-     // Compare taskList with myTaskList
-  }
-*/
+//    if (is_priority_list_present(priority)) {
+//        PrioritizedTaskListNode *priorityListNode = get_address(priority);
+//        DoublyLinkedTaskList myTaskList = priorityListNode->get_task_list();
+//
+//        // Compare taskList with myTaskList
+//    }
+
     return false;
 }
 
 bool PrioritizedTaskList::exist(int priority, int task_id) {
-    if (is_priority_list_present(priority)) {
-        PrioritizedTaskListNode *priorityList = get_address(priority);
-        return priorityList->does_task_id_exist(task_id);
-    }
+//    if (is_priority_list_present(priority)) {
+//        PrioritizedTaskListNode *priorityList = get_address(priority);
+//        return priorityList->does_task_id_exist(task_id);
+//    }
     return false;
 }
 
 bool PrioritizedTaskList::remove_task_id(int priority, int task_id) {
-    PrioritizedTaskListNode *priorityNode = get_address(priority);
-    if (priorityNode != NULL) {
-        priorityNode->remove_task_id(task_id);
-    }
+//    PrioritizedTaskListNode *priorityNode = get_address(priority);
+//    if (priorityNode != NULL) {
+//        priorityNode->remove_task_id(task_id);
+//    }
     return true;
 }
 
@@ -647,6 +652,9 @@ bool PrioritizedTaskList::removePriorityList(int priority) {
 
 int main() {
     PrioritizedTaskList tree1;
+    PrioritizedTaskList tree2;
+
+    PrioritizedTaskList tree3;
 // add 362
 // add_task 109
 // 28s
@@ -659,10 +667,19 @@ int main() {
     char name1[] = "Josh";
     char name2[] = "Megan";
     char name3[] = "Jack";
+    char name4[] = "Jackie";
     tree1.add(2, 12, name1, 4);
     tree1.add(5, 13, name2, 5);
     tree1.add(6, 14, name3, 4);
+
+    tree2.add(8, 87, name4, 6);
+    tree3.add(8, 87, name4, 6);
+
     tree1.display();
+
+    bool isEqual = tree2.is_equal_to(tree3);
+    cout << "Is Equal: " << isEqual;
+
 //    tree1.removePriorityList(5);
 //    cout << endl;
 //    tree1.display();
